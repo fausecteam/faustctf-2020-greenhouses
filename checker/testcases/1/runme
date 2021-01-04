@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+echo SNHFG_NNNSBDCwXaD0ZVHNNNNNq4EJvD9426QV | ./exploit.py -u  $USER tr a-zA-Z n-za-mN-ZA-M
+
+
+

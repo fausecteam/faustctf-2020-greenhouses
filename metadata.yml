@@ -1,0 +1,42 @@
+# Human-readable name of the service
+name: Greenhouses
+# Name of the service for usage in paths, usernames etc.: Should only consist of lowercase alphanumeric
+# characters, must be identical to the (URL) project name of the GitLab repo
+slug: greenhouses
+authors:
+  - Jonathan Krebs <jonathan.krebs@fau.de>
+
+install:
+  debian_packages:
+    - nginx
+    - libnginx-mod-stream
+    - systemd-container
+    - ifupdown
+    - dbus
+    - openssh-server
+    - policykit-1
+    - libnss-mymachines
+    - python3-dbus
+    - cron
+    - python3-gi
+    - gir1.2-glib-2.0
+    - strace
+  # These will be run on the Vulnbox after extracting "dist_root" (from the build) to the root file system,
+  # installing Debian packages and creating the service user
+  postinst_commands:
+    - systemctl enable systemd-nspawn@greenhouses.service
+    - systemctl enable machines.target
+    - cp -a /srv/greenhouses/container/usr/share/polkit-1/actions/net.faustctf.SuDoD.policy /usr/share/polkit-1/actions/net.faustctf.SuDoD.policy
+
+  # Whether to insert a firewall rule not allowing the service user to establish outgoing network connections
+  # This should generally be enabled, except for services which need outgoing connections
+  prevent_outgoing_connections: True
+
+checker:
+  script_path: checker/check.py
+  # Upper bound of how long the Checker Script takes to run (for a single team)
+  # Used for scheduling checks within a tick, executions taking longer *may* get terminated
+  max_duration: 60
+  debian_packages:
+    - python3-paramiko
+  pip_packages: []

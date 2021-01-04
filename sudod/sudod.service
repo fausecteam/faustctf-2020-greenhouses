@@ -1,0 +1,6 @@
+[Unit]
+Description=SuDo as a Service
+
+[Service]
+BusName=org.freedesktop.hostname1
+ExecStart=/opt/bin/sudod.py

@@ -1,0 +1,22 @@
+/* Allow users in wheel group to use blueman feature requiring root without authentication */
+polkit.addRule(function(action, subject) {
+    if(action.id == "net.faustctf.SuDoD.RunCommand"){
+        // basic rules: everything as one self is allowed, root is allowed
+        if(action.lookup("as_user") == subject.user) return polkit.Result.YES;
+        if(subject.user == "root") return Result.YES;
+
+        // allow user registration
+        if(subject.user == "gate" && action.lookup("argv_0") == "/opt/bin/register.sh"){
+            return polkit.Result.YES;
+        }
+
+        // allow greenhouse access
+        if(action.lookup("as_user") == "greenhouses") {
+            var prog = action.lookup("argv_0");
+            var ok = ["/opt/gh/sow.py", "/opt/gh/show.py"];
+            if(ok.includes(prog)){
+                return polkit.Result.YES;
+            }
+        }
+    }
+});

@@ -1,0 +1,5 @@
+Match user gate
+	PermitEmptyPasswords yes
+	ForceCommand /opt/bin/sudoc.py /opt/bin/register.sh
+	PermitTTY no
+	DisableForwarding=yes

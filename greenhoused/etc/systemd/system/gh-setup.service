@@ -1,0 +1,14 @@
+[Unit]
+Description=Create greenhouses user
+ConditionFirstBoot=yes
+Before=cron.service
+
+[Service]
+Type=oneshot
+ExecStart=useradd --system --create-home --home-dir /var/greenhouses --gid daemon greenhouses
+User=root
+
+[Install]
+WantedBy=multi-user.target
+
+

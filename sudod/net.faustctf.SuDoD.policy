@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD polkit Policy Configuration 1.0//EN"
+"http://www.freedesktop.org/software/polkit/policyconfig-1.dtd">
+
+<policyconfig>
+
+  <vendor>FAUST-CTF 2020</vendor>
+  <vendor_url>https://2020.faustctf.net/</vendor_url>
+
+  <action id="net.faustctf.SuDoD.RunCommand">
+    <description>Run a Command with SuDoD</description>
+    <message>Authentication is required to run $(argv_0)</message>
+    <icon_name>preferences-system</icon_name>
+    <defaults>
+      <allow_any>no</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+  </action>
+</policyconfig>

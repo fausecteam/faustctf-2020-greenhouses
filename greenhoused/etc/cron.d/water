@@ -1,0 +1,4 @@
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+*/2 * * * * greenhouses python3 /opt/gh/water.py
+

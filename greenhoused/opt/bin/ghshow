@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /opt/bin/sudoc.py -u greenhouses /opt/gh/show.py

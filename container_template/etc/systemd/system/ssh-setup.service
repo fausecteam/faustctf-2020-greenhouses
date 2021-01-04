@@ -1,0 +1,15 @@
+[Unit]
+Description=Generate SSH host keys and ssh privilege separation user
+ConditionFirstBoot=yes
+Before=ssh.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/ssh-keygen -A
+ExecStart=useradd --system --home-dir /run/sshd --gid nogroup --shell /bin/false sshd
+ExecStart=usermod --password '*' root
+User=root
+
+[Install]
+WantedBy=multi-user.target
+

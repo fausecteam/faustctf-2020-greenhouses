@@ -1,0 +1,20 @@
+[Exec]
+Boot=yes
+PrivateUsers=pick
+Ephemeral=yes
+LinkJournal=no
+
+[Files]
+BindReadOnly=/usr
+BindReadOnly=/etc/security
+BindReadOnly=/etc/pam.d
+BindReadOnly=/etc/alternatives
+BindReadOnly=/etc/manpath.config
+BindReadOnly=/etc/team-num
+
+# state
+#Bind=/srv/greenhouses/guard/home:/home
+
+[Network]
+VirtualEthernetExtra=greenhouses:host
+

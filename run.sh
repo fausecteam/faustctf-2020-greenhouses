@@ -1,0 +1,1 @@
+sudo systemd-nspawn --directory ./container/ --bind-ro /usr/ --bind-ro /sbin --bind-ro /bin --bind-ro /lib  --bind-ro /lib64  --bind-ro /etc/ld.so.conf --bind-ro /etc/ld.so.conf.d/  --private-users=pick --private-network --boot --bind-ro /etc/pam.d/ --bind-ro /etc/security/ --network-veth-extra a:b

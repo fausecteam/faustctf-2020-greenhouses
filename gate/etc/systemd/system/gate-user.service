@@ -1,0 +1,11 @@
+[Unit]
+Description=Configure gate User for Registration
+Before=ssh.service
+ConditionFirstBoot=yes
+
+[Service]
+Type=oneshot
+ExecStart=useradd --system --password '' gate
+
+[Install]
+WantedBy=multi-user.target

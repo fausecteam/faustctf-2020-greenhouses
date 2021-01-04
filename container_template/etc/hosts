@@ -1,0 +1,4 @@
+127.0.0.1 localhost
+::1 localhost
+
+fd4f:7367:c144:c7f::1 vulnbox

@@ -1,0 +1,41 @@
+stages:
+  - build
+  - upload
+
+build_job:
+  stage: build
+  image: "debian:buster"
+  before_script:
+    - apt-get -y -qq update
+    - apt-get -y -qq install make
+  script:
+    - make install
+    - tar -v -czp -H posix -f dist_root.tar.gz -C dist_root .
+  after_script:
+    - ls -R -l
+  artifacts:
+    paths:
+      - metadata.yml
+      - dist_root/
+      - dist_root.tar.gz
+  only:
+    - master
+  tags:
+    - faust
+    - docker
+
+upload_job:
+  stage: upload
+  script:
+    - ls -R -l
+    - ssh ci-upload@www.faust.cs.fau.de mkdir -p "/var/www/files/internal/ci/faustctf/2020/$CI_PROJECT_NAME"
+    - scp metadata.yml dist_root.tar.gz "ci-upload@www.faust.cs.fau.de:/var/www/files/internal/ci/faustctf/2020/$CI_PROJECT_NAME/"
+  after_script:
+    - find "$CI_PROJECT_DIR" -mindepth 1 -delete
+  variables:
+    GIT_STRATEGY: none
+  only:
+    - master
+  tags:
+    - faust
+    - www-upload
